@@ -11,7 +11,7 @@ import (
 	firebase "firebase.google.com/go/v4"
 	"google.golang.org/api/option"
 	
-	pb "github.com/raflibima25/go-belajar-kong-firebase-grpc/auth-service/proto"
+	pb "github.com/raflibima25/go-belajar-kong-firebase-grpc/grpc/pb"
 )
 
 type authServer struct {
