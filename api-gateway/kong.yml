@@ -1,0 +1,28 @@
+_format_version: "2.1"
+
+services:
+  - name: api-gateway
+    url: http://api-gateway:8080
+    routes:
+      - name: api
+        paths:
+          - /api
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 100
+          policy: local
+      - name: cors
+        config:
+          origins:
+            - "*"
+          methods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+          headers:
+            - Content-Type
+            - Authorization
+          credentials: true
+          max_age: 3600

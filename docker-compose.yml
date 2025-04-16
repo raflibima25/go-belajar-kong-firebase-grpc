@@ -1,0 +1,67 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: myapp
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  auth-service:
+    build:
+      context: ./auth-service
+    environment:
+      DB_HOST: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: myapp
+      FIREBASE_CREDENTIALS: /app/firebase-credentials.json
+    volumes:
+      - ./firebase-credentials.json:/app/firebase-credentials.json:ro
+    depends_on:
+      - postgres
+
+  product-service:
+    build:
+      context: ./product-service
+    environment:
+      DB_HOST: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: myapp
+    depends_on:
+      - postgres
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - auth-service
+      - product-service
+
+  kong:
+    image: kong:3.0.0
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /etc/kong/kong.yml
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+    ports:
+      - "8000:8000" # Kong proxy
+      - "8001:8001" # Kong admin API
+    volumes:
+      - ./api-gateway/kong.yml:/etc/kong/kong.yml:ro
+    depends_on:
+      - api-gateway
+
+volumes:
+  postgres_data:

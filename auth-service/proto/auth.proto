@@ -1,0 +1,49 @@
+syntax = "proto3";
+package auth;
+option go_package = "github.com/raflibima25/go-belajar-kong-firebase-grpc/auth-service/proto;auth";
+
+service AuthService {
+  rpc Register(RegisterRequest) returns (AuthResponse);
+  rpc Login(LoginRequest) returns (AuthResponse);
+  rpc Validate(ValidateRequest) returns (ValidateResponse);
+  rpc GetUserByID(GetUserByIDRequest) returns (User);
+}
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+  string name = 3;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message AuthResponse {
+  string token = 1;
+  User user = 2;
+}
+
+message ValidateRequest {
+  string token = 1;
+}
+
+message ValidateResponse {
+  bool valid = 1;
+  User user = 2;
+}
+
+message GetUserByIDRequest {
+  string id = 1;
+}
+
+message User {
+  string id = 1;
+  string firebase_id = 2;
+  string email = 3;
+  string name = 4;
+  string role = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
