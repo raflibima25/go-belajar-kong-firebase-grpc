@@ -6,11 +6,18 @@ require (
 	firebase.google.com/go/v4 v4.15.2
 	github.com/google/uuid v1.6.0
 	github.com/joho/godotenv v1.5.1
-	github.com/twinj/uuid v1.0.0
 	google.golang.org/api v0.229.0
 	google.golang.org/grpc v1.71.1
-	google.golang.org/protobuf v1.36.6
+	gorm.io/driver/postgres v1.5.11
 	gorm.io/gorm v1.25.12
+)
+
+require (
+	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
+	github.com/jackc/pgx/v5 v5.5.5 // indirect
+	github.com/jackc/puddle/v2 v2.2.1 // indirect
+	google.golang.org/protobuf v1.36.6 // indirect
 )
 
 require (
@@ -42,8 +49,8 @@ require (
 	github.com/googleapis/gax-go/v2 v2.14.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/myesui/uuid v1.0.0 // indirect
 	github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 // indirect
+	github.com/raflibima25/go-belajar-kong-firebase-grpc/grpc v0.0.0
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/contrib/detectors/gcp v1.34.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.60.0 // indirect
@@ -64,7 +71,6 @@ require (
 	google.golang.org/genproto v0.0.0-20241118233622-e639e219e697 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20250106144421-5f5ef82da422 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250414145226-207652e42e2e // indirect
-	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
 )
 
-replace github.com/raflibima25/go-belajar-kong-firebase-grpc/grpc/pb => ../grpc
+replace github.com/raflibima25/go-belajar-kong-firebase-grpc/grpc => ../grpc

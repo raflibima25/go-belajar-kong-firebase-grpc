@@ -40,7 +40,7 @@ message GetUserByIDRequest {
 
 message User {
   string id = 1;
-  string firebase_id = 2;
+  string firebase_uid = 2;
   string email = 3;
   string name = 4;
   string role = 5;
